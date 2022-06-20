@@ -1894,6 +1894,7 @@ class GeneralizedRCNN(nn.Module):
             "max_detections": kwargs.get("max_detections", None),
             "return_tensors": kwargs.get("return_tensors", None),
             "pad_value": kwargs.get("pad_value", 0),
+            "location": kwargs.get("location", "cuda"),
             "padding": kwargs.get("padding", None),
         }
         preds_per_image = torch.tensor([p.size(0) for p in boxes])
