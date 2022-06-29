@@ -1156,7 +1156,7 @@ class ViltForQuestionAnswering(ViltPreTrainedModel):
 
         loss = None
         if labels is not None:
-            loss = nn.CrossEntropyLoss(logits.view(-1, 2), labels.view(-1, 2))    
+            loss = nn.CrossEntropyLoss(logits.view(-1, 2), labels.view(-1))    
             #loss = nn.functional.binary_cross_entropy_with_logits(logits, labels) * labels.shape[1]
             # see https://github.com/jnhwkim/ban-vqa/blob/master/train.py#L19
 
