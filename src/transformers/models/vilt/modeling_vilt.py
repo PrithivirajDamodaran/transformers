@@ -1079,6 +1079,7 @@ class ViltForQuestionAnswering(ViltPreTrainedModel):
             nn.Linear(config.hidden_size, config.hidden_size * 2),
             nn.LayerNorm(config.hidden_size * 2),
             nn.GELU(),
+            nn.Dropout(0.3),
             nn.Linear(config.hidden_size * 2, config.num_labels),
         )
 
