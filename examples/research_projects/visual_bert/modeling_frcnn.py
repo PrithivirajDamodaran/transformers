@@ -1234,6 +1234,7 @@ class ROIOutputs(object):
         sizes,
         scales=None,
     ):
+        self.training = False
         if self.training:
             raise NotImplementedError()
         return self.inference(
@@ -1334,6 +1335,7 @@ class Res5ROIHeads(nn.Module):
         return self.res5(x)
 
     def forward(self, features, proposal_boxes, gt_boxes=None):
+        self.training = False
         if self.training:
             """
             see https://github.com/airsplay/py-bottom-up-attention/\
