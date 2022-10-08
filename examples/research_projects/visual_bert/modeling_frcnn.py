@@ -1581,7 +1581,9 @@ class RPN(nn.Module):
             self.smooth_l1_beta,
         )
         # For RPN-only models, the proposals are the final output
-
+        
+        print("self.training ", self.training)
+        self.training = False
         if self.training:
             raise NotImplementedError()
             return self.training(outputs, images, image_shapes, features, gt_boxes)
@@ -1845,8 +1847,9 @@ class GeneralizedRCNN(nn.Module):
             "max_detections"}, pad_value (int), location = {"cuda", "cpu"}
         """
         print("self.training ", self.training)
-#         if self.training:
-#             raise NotImplementedError()
+        self.training = False
+        if self.training:
+            raise NotImplementedError()
         return self.inference(
             images=images,
             image_shapes=image_shapes,
