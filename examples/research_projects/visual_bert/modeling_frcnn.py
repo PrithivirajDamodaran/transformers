@@ -1584,7 +1584,7 @@ class RPN(nn.Module):
         )
         # For RPN-only models, the proposals are the final output
         
-        print("self.training ", self.training)
+        #print("self.training ", self.training)
         self.training = False
         if self.training:
             raise NotImplementedError()
@@ -1848,7 +1848,7 @@ class GeneralizedRCNN(nn.Module):
             max_detections (int), return_tensors {"np", "pt", None}, padding {None,
             "max_detections"}, pad_value (int), location = {"cuda", "cpu"}
         """
-        print("self.training ", self.training)
+        #print("self.training ", self.training)
         self.training = False
         if self.training:
             raise NotImplementedError()
