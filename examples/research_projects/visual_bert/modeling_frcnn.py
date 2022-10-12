@@ -1913,7 +1913,7 @@ class GeneralizedRCNN(nn.Module):
         subset_kwargs["padding"] = None
         preds_per_image = pad_list_tensors(preds_per_image, None, **subset_kwargs)
         sizes = pad_list_tensors(image_shapes, None, **subset_kwargs)
-        normalized_boxes = norm_box(boxes, original_sizes)
+        #normalized_boxes = norm_box(boxes, original_sizes)
         return OrderedDict(
             {
                 "obj_ids": classes,
@@ -1924,6 +1924,6 @@ class GeneralizedRCNN(nn.Module):
                 "sizes": sizes,
                 "preds_per_image": preds_per_image,
                 "roi_features": roi_features,
-                "normalized_boxes": normalized_boxes,
+                #"normalized_boxes": normalized_boxes,
             }
         )
