@@ -1665,7 +1665,6 @@ class GeneralizedRCNN(nn.Module):
         super().__init__()
 
         self.device = torch.device(cfg.MODEL.DEVICE)
-        self.training = False
         self.backbone = build_backbone(cfg)
         self.proposal_generator = RPN(cfg, self.backbone.output_shape())
         self.roi_heads = Res5ROIHeads(cfg, self.backbone.output_shape())
@@ -1849,8 +1848,6 @@ class GeneralizedRCNN(nn.Module):
             max_detections (int), return_tensors {"np", "pt", None}, padding {None,
             "max_detections"}, pad_value (int), location = {"cuda", "cpu"}
         """
-        print("self.training ", self.training)
-        self.training = False
         if self.training:
             raise NotImplementedError()
         return self.inference(
