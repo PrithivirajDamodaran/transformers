@@ -1137,7 +1137,7 @@ class ROIOutputs(object):
     def __init__(self, cfg, training=False):
         self.smooth_l1_beta = cfg.ROI_BOX_HEAD.SMOOTH_L1_BETA
         self.box2box_transform = Box2BoxTransform(weights=cfg.ROI_BOX_HEAD.BBOX_REG_WEIGHTS)
-        self.training = training
+        self.training = False
         self.score_thresh = cfg.ROI_HEADS.SCORE_THRESH_TEST
         self.min_detections = cfg.MIN_DETECTIONS
         self.max_detections = cfg.MAX_DETECTIONS
@@ -1584,7 +1584,7 @@ class RPN(nn.Module):
         )
         # For RPN-only models, the proposals are the final output
         
-        #print("self.training ", self.training)
+        print("self.training ", self.training)
         self.training = False
         if self.training:
             raise NotImplementedError()
@@ -1682,6 +1682,7 @@ class GeneralizedRCNN(nn.Module):
         proxies = kwargs.pop("proxies", None)
         local_files_only = kwargs.pop("local_files_only", False)
         use_cdn = kwargs.pop("use_cdn", True)
+        self.training = False
 
         # Load config if we don't provide a configuration
         if not isinstance(config, Config):
@@ -1831,6 +1832,7 @@ class GeneralizedRCNN(nn.Module):
             )
         # Set model in evaluation mode to deactivate DropOut modules by default
         model.eval()
+        self.training = False
 
         return model
 
@@ -1848,6 +1850,7 @@ class GeneralizedRCNN(nn.Module):
             max_detections (int), return_tensors {"np", "pt", None}, padding {None,
             "max_detections"}, pad_value (int), location = {"cuda", "cpu"}
         """
+        print("self.training", self.training)
         self.training = False 
         if self.training:
             raise NotImplementedError()
