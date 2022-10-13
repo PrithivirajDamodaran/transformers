@@ -1536,6 +1536,7 @@ class RPN(nn.Module):
         pass
 
     def inference(self, outputs, images, image_shapes, features, gt_boxes=None):
+        self.training = False
         outputs = find_top_rpn_proposals(
             outputs.predict_proposals(),
             outputs.predict_objectness_logits(),
@@ -1665,7 +1666,6 @@ class GeneralizedRCNN(nn.Module):
         super().__init__()
 
         self.device = torch.device(cfg.MODEL.DEVICE)
-        self.training = False
         self.backbone = build_backbone(cfg)
         self.proposal_generator = RPN(cfg, self.backbone.output_shape())
         self.roi_heads = Res5ROIHeads(cfg, self.backbone.output_shape())
@@ -1683,7 +1683,6 @@ class GeneralizedRCNN(nn.Module):
         proxies = kwargs.pop("proxies", None)
         local_files_only = kwargs.pop("local_files_only", False)
         use_cdn = kwargs.pop("use_cdn", True)
-        self.training = False
 
         # Load config if we don't provide a configuration
         if not isinstance(config, Config):
@@ -1833,7 +1832,6 @@ class GeneralizedRCNN(nn.Module):
             )
         # Set model in evaluation mode to deactivate DropOut modules by default
         model.eval()
-        self.training = False
 
         return model
 
