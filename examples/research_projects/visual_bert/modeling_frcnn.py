@@ -1137,7 +1137,7 @@ class ROIOutputs(object):
     def __init__(self, cfg, training=False):
         self.smooth_l1_beta = cfg.ROI_BOX_HEAD.SMOOTH_L1_BETA
         self.box2box_transform = Box2BoxTransform(weights=cfg.ROI_BOX_HEAD.BBOX_REG_WEIGHTS)
-        self.training = False
+        #self.training = False
         self.score_thresh = cfg.ROI_HEADS.SCORE_THRESH_TEST
         self.min_detections = cfg.MIN_DETECTIONS
         self.max_detections = cfg.MAX_DETECTIONS
@@ -1234,7 +1234,7 @@ class ROIOutputs(object):
         sizes,
         scales=None,
     ):
-        self.training = False
+        #self.training = False
         if self.training:
             raise NotImplementedError()
         return self.inference(
@@ -1335,7 +1335,7 @@ class Res5ROIHeads(nn.Module):
         return self.res5(x)
 
     def forward(self, features, proposal_boxes, gt_boxes=None):
-        self.training = False
+        #self.training = False
         if self.training:
             """
             see https://github.com/airsplay/py-bottom-up-attention/\
@@ -1536,7 +1536,7 @@ class RPN(nn.Module):
         pass
 
     def inference(self, outputs, images, image_shapes, features, gt_boxes=None):
-        self.training = False
+        #self.training = False
         outputs = find_top_rpn_proposals(
             outputs.predict_proposals(),
             outputs.predict_objectness_logits(),
@@ -1585,8 +1585,8 @@ class RPN(nn.Module):
         )
         # For RPN-only models, the proposals are the final output
         
-        print("self.training ", self.training)
-        self.training = False
+        #print("self.training ", self.training)
+        #self.training = False
         if self.training:
             raise NotImplementedError()
             return self.training(outputs, images, image_shapes, features, gt_boxes)
@@ -1849,8 +1849,8 @@ class GeneralizedRCNN(nn.Module):
             max_detections (int), return_tensors {"np", "pt", None}, padding {None,
             "max_detections"}, pad_value (int), location = {"cuda", "cpu"}
         """
-        print("self.training", self.training)
-        self.training = False 
+        #print("self.training", self.training)
+        #self.training = False 
         if self.training:
             raise NotImplementedError()
         return self.inference(
