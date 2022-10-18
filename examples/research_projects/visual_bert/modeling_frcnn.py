@@ -1849,8 +1849,8 @@ class GeneralizedRCNN(nn.Module):
             max_detections (int), return_tensors {"np", "pt", None}, padding {None,
             "max_detections"}, pad_value (int), location = {"cuda", "cpu"}
         """
-        #print("self.training", self.training)
-        #self.training = False 
+        print("self.training", self.training)
+        self.training = False 
         if self.training:
             raise NotImplementedError()
         return self.inference(
