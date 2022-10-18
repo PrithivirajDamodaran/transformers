@@ -1137,7 +1137,7 @@ class ROIOutputs(object):
     def __init__(self, cfg, training=False):
         self.smooth_l1_beta = cfg.ROI_BOX_HEAD.SMOOTH_L1_BETA
         self.box2box_transform = Box2BoxTransform(weights=cfg.ROI_BOX_HEAD.BBOX_REG_WEIGHTS)
-        #self.training = False
+        self.training = False
         self.score_thresh = cfg.ROI_HEADS.SCORE_THRESH_TEST
         self.min_detections = cfg.MIN_DETECTIONS
         self.max_detections = cfg.MAX_DETECTIONS
@@ -1234,7 +1234,7 @@ class ROIOutputs(object):
         sizes,
         scales=None,
     ):
-        #self.training = False
+        self.training = False
         if self.training:
             raise NotImplementedError()
         return self.inference(
